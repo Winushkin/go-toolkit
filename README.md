@@ -32,6 +32,7 @@ import (
 	"github.com/Winushkin/go-toolkit/config"
 	"github.com/Winushkin/go-toolkit/logger"
 	"github.com/Winushkin/go-toolkit/postgres"
+	"go.uber.org/zap"
 )
 
 const devMode = true
@@ -47,7 +48,28 @@ func main() {
 	if !ok {
 		panic("logger not found in context")
 	}
+```
 
+#### Если ваши переменные называются стандартно:
+```
+POSTGRES_HOST
+POSTGRES_PORT
+POSTGRES_USER
+POSTGRES_PASSWORD
+POSTGRES_DB
+POSTGRES_MIN_CONNS
+POSTGRES_MAX_CONNS
+
+SERVER_PORT
+```
+то можно использовать функцию, которая автоматически подтянет ваши изменения:
+```go
+	// 2. Инициализация конфигурации PostgreSQL
+	cfg := config.NewAppConfig()
+	pgCfg := cfg.Postgres
+```
+Если же ваши переменные называются иначе, то придется использовать функция GetEnv и считывать каждую переменную отдельно: 
+```go
 	// 2. Инициализация конфигурации PostgreSQL
 	pgCfg := postgres.Config{
 		Host: config.GetEnv("POSTGRES_HOST", "localhost"),
@@ -55,7 +77,10 @@ func main() {
 		// ...
 		MaxConns: config.GetEnv("POSTGRES_MAXCONNS", "1"),
 	}
+```
 
+И далее использовать ваш конфиг
+```go
 	// 3. Подключение к PostgreSQL
 	pool, err := postgres.NewPool(ctx, pgCfg)
 	if err != nil {
@@ -63,5 +88,6 @@ func main() {
 	}
 
 	log.Info(ctx, "Успешное подключение к базе данных!", zap.String("Port", pgCfg.Port))
+	pool.Exec(ctx, "query")
 }
 ```
