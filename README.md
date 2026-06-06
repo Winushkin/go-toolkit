@@ -62,6 +62,6 @@ func main() {
 		panic(fmt.Errorf("failed to create postgres pool: %w", err))
 	}
 
-	log.Info("Успешное подключение к базе данных!")
+	log.Info(ctx, "Успешное подключение к базе данных!", zap.String("Port", pgCfg.Port))
 }
 ```
