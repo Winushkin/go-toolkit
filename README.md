@@ -28,9 +28,10 @@ package main
 import (
 	"context"
 	"fmt"
-	"github/Winushkin/go-toolkit/config"
-	"github/Winushkin/go-toolkit/logger"
-	"github/Winushkin/go-toolkit/postgres"
+
+	"github.com/Winushkin/go-toolkit/config"
+	"github.com/Winushkin/go-toolkit/logger"
+	"github.com/Winushkin/go-toolkit/postgres"
 )
 
 const devMode = true
