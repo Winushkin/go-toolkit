@@ -61,6 +61,8 @@ POSTGRES_MIN_CONNS
 POSTGRES_MAX_CONNS
 
 SERVER_PORT
+SERVER_HOST
+DOMAIN_NAME
 ```
 то можно использовать функцию, которая автоматически подтянет ваши изменения:
 ```go

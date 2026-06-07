@@ -18,8 +18,10 @@ func GetEnv(key, defaultValue string) string {
 
 // AppConfig содержит конфигурационные переменные для приложения.
 type AppConfig struct {
-	Postgres postgres.Config `env-prefix:"POSTGRES_"`
-	Port     string          `env:"SERVER_PORT"`
+	Postgres   postgres.Config `env-prefix:"POSTGRES_"`
+	Port       string          `env:"SERVER_PORT"`
+	Host       string          `env:"SERVER_HOST"`
+	DomainName string          `env:"DOMAIN_NAME"`
 }
 
 // NewAppConfig считывает переменные окружения и возвращает структуру AppConfig.
