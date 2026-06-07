@@ -30,7 +30,7 @@ func main() {
 	// 3. Подключение к PostgreSQL
 	pool, err := postgres.NewPool(ctx, pgCfg)
 	if err != nil {
-		panic(fmt.Errorf("failed to create postgres pool: %w", err))
+		log.Error(ctx, err, "failed to create postgres pool")
 	}
 
 	log.Info(ctx, "Успешное подключение к базе данных!", zap.String("Port", pgCfg.Port))

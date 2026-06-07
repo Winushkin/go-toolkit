@@ -92,12 +92,13 @@ func (l *Logger) Warn(ctx context.Context, msg string, fields ...zap.Field) {
 	l.l.Warn(msg, fields...)
 }
 
-func (l *Logger) Error(ctx context.Context, msg string, fields ...zap.Field) {
+func (l *Logger) Error(ctx context.Context, err error, msg string, fields ...zap.Field) {
 	if l == nil || l.l == nil {
 		return
 	}
-
+	
 	fields = l.withRequestID(ctx, fields)
+	fields = append(fields, zap.Error(err))
 	l.l.Error(msg, fields...)
 }
 
