@@ -5,6 +5,7 @@ import (
 	"os"
 
 	"github.com/Winushkin/go-toolkit/postgres"
+	"github.com/Winushkin/go-toolkit/redis"
 	"github.com/ilyakaznacheev/cleanenv"
 )
 
@@ -19,6 +20,7 @@ func GetEnv(key, defaultValue string) string {
 // AppConfig содержит конфигурационные переменные для приложения.
 type AppConfig struct {
 	Postgres   postgres.Config `env-prefix:"POSTGRES_"`
+	Redis      redis.Config    `env-prefix:"REDIS_"`
 	Port       string          `env:"SERVER_PORT"`
 	Host       string          `env:"SERVER_HOST"`
 	DomainName string          `env:"DOMAIN_NAME"`

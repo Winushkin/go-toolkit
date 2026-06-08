@@ -63,6 +63,11 @@ POSTGRES_MAX_CONNS
 SERVER_PORT
 SERVER_HOST
 DOMAIN_NAME
+
+REDIS_HOST
+REDIS_PORT
+REDIS_PASSWORD
+REDIS_DB
 ```
 то можно использовать функцию, которая автоматически подтянет ваши изменения:
 ```go
