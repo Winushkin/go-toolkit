@@ -98,7 +98,9 @@ func (l *Logger) Error(ctx context.Context, err error, msg string, fields ...zap
 	}
 	
 	fields = l.withRequestID(ctx, fields)
-	fields = append(fields, zap.Error(err))
+	if err != nil{
+		fields = append(fields, zap.Error(err))
+	}
 	l.l.Error(msg, fields...)
 }
 
